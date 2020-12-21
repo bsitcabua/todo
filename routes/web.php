@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'UserSessionController@index')->name('login');
+Route::get('/login', 'UserSessionController@index')->name('login');
+Route::post('/login', 'UserSessionController@store')->name('login.store');
+Route::get('/logout','UserSessionController@logout')->name('logout');
+
+
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/todo', function () {
+        return view('todo');
+    });
+    
 });

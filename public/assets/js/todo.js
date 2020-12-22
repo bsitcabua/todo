@@ -20,15 +20,35 @@ function getAjax(url, success) {
 getItems();
 
 function getItems(){
-    
+
+    var filter_val = $('#filter_item').val();
+    var filter_by = 'default';
+
+    if( filter_val == 2 ) {
+        filter_by = 'active';
+    }
+    else if( filter_val == 3 ) {
+        filter_by = 'completed';
+    }
+
     getAjax('items', function(data){
         var json = JSON.parse(data);
         var items = json.data.items;
         var html = '';
 
+        if( filter_by != 'default' ) {
+
+            var filter = ( filter_by == 'active') ? 0 : 1;
+
+            items =  items.filter(function(item) {
+                return item.is_completed == filter;
+            });
+        }
+        
+
         if( items.length < 1 ) {
             html += '<tr>\
-                    <td scope="row" colspan="4" class="text-center">\
+                    <td scope="row" colspan="5" class="text-center">\
                         No data found.\
                     </td>\
                 </tr>';
@@ -38,13 +58,15 @@ function getItems(){
         for (var i = 0; i < items.length; i++){
     
             var obj = items[i];
-    
-            console.log(obj)
+            var is_completed = ( obj.is_completed ) ? 'checked' : '';
+            var status = ( obj.is_completed ) ? ' <span class="badge badge-success" title="'+obj.completion+'">Completed</span>' : ' <span class="badge badge-primary">Active</span>';
+
             html += '<tr>\
                         <td scope="row">\
-                            <input class="checkbox" type="checkbox">\
+                            <input class="checkbox check_or_uncheck_this" type="checkbox" '+is_completed+' value="'+obj.id+'" style="cursor: pointer">\
                         </td>\
                         <td>'+obj.name+'</td>\
+                        <td>'+status+'</td>\
                         <td>'+obj.deadline+'</td>\
                         <td class="text-center">\
                             <i class="fa fa-pencil text-info mr-1 edit_todo" data-id="'+obj.id+'" title="Edit" style="cursor: pointer"></i>\
@@ -92,6 +114,9 @@ $(document).on('click', '#btn_add_item', function(){
         deadline_date : deadline_date,
         deadline_time : deadline_time,
     };
+
+    // Set to default value
+    $("#filter_item").val("1");
 
     $('.input_control').removeClass('is-invalid');
 
@@ -178,7 +203,7 @@ $(document).on('click', '.edit_todo', function(){
     postAjax('item-get', data, function(data){ 
         var json = JSON.parse(data);
 
-        console.log(json);
+        // console.log(json);
         if( json.success == true ){
 
             $('#update_name').val(json.data.name);
@@ -237,4 +262,48 @@ $(document).on('click', '#confirm_update_todo', function(){
         }
     });
 
+});
+
+$(document).on('change', '.check_or_uncheck_this', function(){
+
+    var todo_id = $(this).val();
+    var is_checked = 0;
+
+    if($(this).prop("checked") == true){
+        is_checked = 1;
+    }
+    else if($(this).prop("checked") == false){
+        is_checked = 0;
+    }
+
+    var data = {id: todo_id, is_checked: is_checked};
+
+    $('#checking_item_modal').modal('toggle');
+
+    // example request with data object
+    postAjax('item-checking', data, function(data){ 
+        var json = JSON.parse(data);
+
+        // console.log(json);
+        if( json.success == true ){
+            
+            getItems();
+
+            setTimeout(function(){
+                $('#checking_item_modal').modal('toggle');
+            },1000);
+
+        }
+    });
+});
+
+$(document).on('change', '#filter_item', function(){
+
+    $('#filter_spin').attr('hidden', false);
+
+    getItems();
+
+    setTimeout(function(){
+        $('#filter_spin').attr('hidden', true);
+    },100);
 });

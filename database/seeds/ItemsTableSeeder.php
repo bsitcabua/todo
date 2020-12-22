@@ -14,13 +14,13 @@ class ItemsTableSeeder extends Seeder
     {
         $payload = [
             [
-                'name'          => 'Todo1',
+                'name'          => 'Sample Data 1',
                 'completion'    => date('Y-m-d H:i:s'),
                 'deadline'      => date('Y-m-d H:i:s'),
                 'is_completed'  => 0,
             ],
             [
-                'name'          => 'Todo2',
+                'name'          => 'Lorem Ipsum',
                 'completion'    => date('Y-m-d H:i:s'),
                 'deadline'      => date('Y-m-d H:i:s'),
                 'is_completed'  => 1,

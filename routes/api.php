@@ -28,3 +28,4 @@ Route::post('/item-store', 'ItemController@store');
 Route::post('/item-update', 'ItemController@update');
 Route::post('/item-destroy', 'ItemController@destroy');
 Route::post('/item-get', 'ItemController@get');
+Route::post('/item-checking', 'ItemController@checking');

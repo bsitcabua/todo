@@ -17,14 +17,22 @@
                     <label class="my-1 mr-2">Todo name <b class="text-danger">*</b></label>
                     <input type="text" class="form-control input_control_update" name="name" id="update_name" placeholder="Todo name" required>
                 </div>
-                <div class="col-md-6 col-sm-12 mt-2">
+
+                <div class="col-md-12 col-sm-12 mt-2">
+                    <label class="my-1 mr-2">Due <b class="text-danger">*</b></label>
+                    <div class="input-group">
+                        <input type="date" class="form-control input_control_update" name="deadline_date" id="update_deadline_date" required>
+                        <input type="time" class="form-control input_control_update" name="deadline_time" id="update_deadline_time" required>
+                    </div>
+                </div>
+                {{-- <div class="col-md-6 col-sm-12 mt-2">
                     <label class="my-1 mr-2">Deadline date <b class="text-danger">*</b></label>
                     <input type="date" class="form-control input_control_update" name="deadline_date" id="update_deadline_date" required>
                 </div>
                 <div class="col-md-6 col-sm-12 mt-2">
                     <label class="my-1 mr-2">Deadline time <b class="text-danger">*</b></label>
                     <input type="time" class="form-control input_control_update" name="deadline_time" id="update_deadline_time" required>
-                </div>
+                </div> --}}
                  
             </div>
         </div>

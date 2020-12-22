@@ -43,14 +43,14 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Username</label>
-                            <input type="text" name="username"  class="form-control {{ (isset(session('error')['username'])) ? 'is-invalid' : '' }}" id="username" value="{{ old('username') }}" placeholder="Enter username">
+                            <input type="text" name="username"  class="form-control {{ (isset(session('error')['username'])) ? 'is-invalid' : '' }}" id="username" value="admin" placeholder="Enter username">
                             <div class="invalid-feedback">
                                 {{ (isset(session('error')['username'])) ? session('error')['username'][0] : '' }}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Password</label>
-                            <input type="password" name="password" id="password"  class="form-control {{ (isset(session('error')['password'])) ? 'is-invalid' : '' }}"  placeholder="Enter Password">
+                            <input type="password" name="password" id="password"  class="form-control {{ (isset(session('error')['password'])) ? 'is-invalid' : '' }}" value="admin"  placeholder="Enter Password">
                             <div class="invalid-feedback">
                                 {{ (isset(session('error')['password'])) ? session('error')['password'][0] : '' }}
                             </div>

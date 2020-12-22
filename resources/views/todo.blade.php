@@ -15,36 +15,57 @@
             <div class="col-md-12">
                 <div class="card px-3">
                     <div class="card-body">
-                        <a href="/logout" class="btn btn-sm btn-primary float-right">Logout</a>
+                        <a href="/logout" class="btn btn-sm btn-primary float-right font-weight-bold">Logout</a>
                         <h4 class="card-title">Hurdman Todo list </h4>
                         
                         <div class="form-row">
-                            <div class="col-md-4 col-sm-12 mt-2">
+                            <div class="col-md-5 col-sm-12 mt-2">
                                 <label class="my-1 mr-2">Todo name <b class="text-danger">*</b></label>
                                 <input type="text" class="form-control input_control" name="name" id="name" placeholder="Todo name" required>
                             </div>
-                            <div class="col-md-3 col-sm-12 mt-2">
+                            <div class="col-md-5 col-sm-12 mt-2">
+                                <label class="my-1 mr-2">Due <b class="text-danger">*</b></label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control input_control" name="deadline_date" id="deadline_date" required>
+                                    <input type="time" class="form-control input_control" name="deadline_time" id="deadline_time" required>
+                                </div>
+                            </div>
+                            {{-- <div class="col-md-3 col-sm-12 mt-2">
                                 <label class="my-1 mr-2">Deadline date <b class="text-danger">*</b></label>
                                 <input type="date" class="form-control input_control" name="deadline_date" id="deadline_date" required>
                             </div>
                             <div class="col-md-3 col-sm-12 mt-2">
                                 <label class="my-1 mr-2">Deadline time <b class="text-danger">*</b></label>
                                 <input type="time" class="form-control input_control" name="deadline_time" id="deadline_time" required>
-                            </div>
+                            </div> --}}
                             <div class="col-md-2 col-sm-12 mt-2">
                                 <label class="my-1 mr-2" style="visibility: hidden">Add</label>
                                 <button class="add btn btn-block btn-primary font-weight-bold todo-list-add-btn" id="btn_add_item">Add</button>
                             </div>
-                             
+                            
                         </div>
+                        
+                        
 
-                        <div class="table-responsive">
-                            <table class="table mt-5">
+                        <div class="table-responsive mt-4">
+
+                            <div class="form-group">
+                                <label for="filter_item" title="Filter"><i class="fa fa-filter" aria-hidden="true"></i></label>
+                                <select id="filter_item">
+                                  <option value="1">All</option>
+                                  <option value="2">Active</option>
+                                  <option value="3">Completed</option>
+                                </select>
+                                <i class="fa fa-spinner fa-spin" id="filter_spin" aria-hidden="true" hidden></i>
+                              </div>
+
+                            <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col" style="width: 15%;"></th>
+                                    <th scope="col"></th>
                                     <th scope="col" style="width: 50%;">Name</th>
-                                    <th scope="col">Deadline</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Due</th>
                                     <th scope="col" class="text-center">Actions</th>
                                 </tr>
                                 </thead>
@@ -60,6 +81,7 @@
     </div>  
 
     @include('modals.delete_item')
+    @include('modals.checking_item')
     @include('modals.update_item')
     @include('modals.adding')
     

@@ -2,6 +2,14 @@
 var base_url = window.location.origin;
 var api_base_url = base_url + '/api/';
 
+function truncateString(str, num) {
+    if (str.length <= num) {
+      return str
+    }
+    return str.slice(0, num) + '...'
+}
+  
+  truncateString("A-tisket a-tasket A green and yellow basket", 8);
 
 function getAjax(url, success) {
     // Set up our HTTP request
@@ -65,7 +73,7 @@ function getItems(){
                         <td scope="row">\
                             <input class="checkbox check_or_uncheck_this" type="checkbox" '+is_completed+' value="'+obj.id+'" style="cursor: pointer">\
                         </td>\
-                        <td>'+obj.name+'</td>\
+                        <td title="'+obj.name+'">'+truncateString(obj.name, 50)+'</td>\
                         <td>'+status+'</td>\
                         <td>'+obj.deadline+'</td>\
                         <td class="text-center">\
